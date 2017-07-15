@@ -1,10 +1,13 @@
 {% load staticfiles %}
 <!DOCTYPE HTML>
 <!--
+	Twenty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 	<head>
-		<title>Test</title>
+		<title>OneTwo</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -17,7 +20,7 @@
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1 id="logo"><a href="index.html">OneTwo</a></h1>
+					<h1 id="logo"><a href="/">OneTwo</a></h1>
 					<nav id="nav">
 						<ul>
 							<li class="current"><a href="/">Welcome</a></li>
@@ -80,46 +83,30 @@
 							</header>
 
 							<div class="row" id="anounce_main">
-								<div class="6u 12u(narrower)" id="anounce_detail_main" value="1">
-									<section>
-										<header>
-											<h3>제목</h3>
-										</header>
-										<p>내용</p>
-									</section>
-								</div>
-								<div class="6u 12u(narrower)" id="anounce_detail_main" value="1">
-									<section>
-										<header>
-											<h3>제목</h3>
-										</header>
-										<p>내용</p>
-									</section>
-								</div>
-							</div>
-							<div class="row" id="anounce_main">
-								<div class="6u 12u(narrower)" id="anounce_detail_main" value="1">
-									<section>
-										<header>
-											<h3>제목</h3>
-										</header>
-										<p>내용</p>
-									</section>
-								</div>
-								<div class="6u 12u(narrower)" id="anounce_detail_main" value="1">
-									<section>
-										<header>
-											<h3>제목</h3>
-										</header>
-										<p>내용</p>
-									</section>
-								</div>
+								{% for anounce in anounce %}
+									<div style="cursor:pointer" class="6u 12u(narrower)" id="anounce_detail_main" value="{{anounce.id}}">
+										<section>
+											<header>
+												{% if anounce.title|length > 10 %}
+													<h3>{{anounce.title|slice:"0:10"}}...</h3>
+												{% else %}
+													<h3>{{anounce.title}}</h3>
+												{% endif %}
+											</header>
+											<p>{{anounce.context|slice:"0:20"}}...</p>
+										</section>
+									</div>
+								{% endfor %}
+
+
+
+
 							</div>
 
 
 							<footer class="major">
 								<ul class="buttons">
-									<li><a href="#" class="button">See More</a></li>
+									<li><a href="/anounce/" class="button">See More</a></li>
 								</ul>
 							</footer>
 
@@ -136,7 +123,7 @@
 					</header>
 					<footer>
 						<ul class="buttons">
-							<li><a href="#" class="button">Click!</a></li>
+							<li><a href="/contact/" class="button">Click!</a></li>
 						</ul>
 					</footer>
 
@@ -166,6 +153,24 @@
 			<script src="{% static 'assets/js/util.js' %}"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="{% static 'assets/js/main.js' %}"></script>
+			<script>
+
+	// 		$(document).on("click",".p_a",function(){
+	// 	var num = $(this).attr("data-num");
+	// 	var url = "/community/anounce_detail.html/"+num;
+	// 	$(location).attr('href',url);
+	//
+	// });
+
+
+
+			$(document).on("click", "#anounce_detail_main", function(){
+				var value = $(this).attr("value");
+				var url = "/anounce_detail/"+value;
+				$(location).attr('href',url);
+			});
+
+			</script>
 
 	</body>
 </html>

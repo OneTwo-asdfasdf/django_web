@@ -1,0 +1,117 @@
+
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+    <title>OneTwo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="{% static 'assets/css/main.css'%}" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="/">OneTwo</a></h1>
+					<nav id="nav">
+						<ul>
+              <li class="current"><a href="/">Welcome</a></li>
+							<li class="submenu">
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="/anounce/">Anounce</a></li>
+									<li><a href="/contact/">Contact</a></li>
+								</ul>
+							</li>
+							<li><a href="#"></a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon fa-mobile"></span>
+						<h2><strong>Announce</strong></h2>
+					</header>
+
+					<!-- One -->
+
+					<!-- Two -->
+						<section class="wrapper style1 container special">
+							<div class="row">
+                {% for anounce in anounce %}
+								<div class="4u 12u(narrower)">
+									<section>
+										<header>
+                      {% if anounce.title|length > 10 %}
+                        <h3>{{anounce.title|slice:"0:10"}}...</h3>
+                      {% else %}
+                        <h3>{{anounce.title}}</h3>
+                      {% endif %}
+										</header>
+										  <p>{{anounce.context|slice:"0:20"}}...</p>
+										<footer>
+											<ul class="buttons">
+												<li><a href="#" value="{{anounce.id}}" id="btn_value" class="button small">Check More</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+                {% endfor %}
+							</div>
+						</section>
+
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+
+					<ul class="icons">
+						<li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
+						<li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.scrollgress.min.js' %}"></script>
+    <script src="{% static 'assets/js/skel.min.js' %}"></script>
+    <script src="{% static 'assets/js/util.js' %}"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script>
+
+
+    $(document).on("click", "#btn_value", function(){
+      var value = $(this).attr("value");
+      var url = "/anounce_detail/"+value;
+      $(location).attr('href',url);
+    });
+
+    </script>
+
+	</body>
+</html>

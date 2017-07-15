@@ -10,11 +10,19 @@ from django.utils import timezone
 
 
 def index(request):
-	anounce = Anounce.objects.filter(published__lte=timezone.now()).order_by('published')
+	anounce = Anounce.objects.filter(published__lte=timezone.now()).order_by('published')[:4].values()
 	return render(request, 'index.html', {'anounce' : anounce})
 
 def contact(request):
 	return render(request, 'contact.html', {})
+
+def anounce(request):
+	anounce = Anounce.objects.filter(published__lte=timezone.now()).order_by('published')
+	return render(request, 'anounce.html', {'anounce' : anounce})
+
+def anounce_detail(request, pk):
+	anounce = Anounce.objects.filter(id=pk)
+	return render(request, 'anounce_detail.html', {'anounce' : anounce})
 
 @csrf_exempt
 def contact_check(request):
