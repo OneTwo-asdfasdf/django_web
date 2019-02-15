@@ -1,4 +1,4 @@
-# Developed by OneTwo
+# Developed by j0dev
 
 # os == ubuntu 16.04 LTS
 # ptyhon == 3.5ver
